@@ -1,3 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'DM Sans', sans-serif;
+}
+.bg-music {
+    background: linear-gradient(120deg, rgba(12,13,13,1) 0%, rgba(130,179,186,1) 58%), url('https://media.istockphoto.com/id/1273305991/photo/feeling-bored-technology-can-take-care-of-that.jpg?b=1&s=170667a&w=0&k=20&c=8DtzbPaK8Dma3GaTqteyGYZkeP9RJeudHguSRdCACeY=');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
+}
+::-webkit-scrollbar{
+    width: 5px;
+    border-radius: 12px;
+    background: #393939;
+}
+::-webkit-scrollbar-thumb{
+    background: grey;
+    border-radius: 12px;
+}
