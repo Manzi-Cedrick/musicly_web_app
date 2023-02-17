@@ -8,8 +8,8 @@ const Header = () => {
             <SearchInput/>
             <div className='flex gap-4'>
                 <div>
-                    <button className='bg-[#FB2576] text-white flex gap-4 place-items-center rounded-full px-4 duration-300 font-medium p-3 '>
-                        <div className='bg-white p-2 text-[#FB2576] shadow-xl rounded-full'>
+                    <button className='bg-main text-white flex gap-4 place-items-center rounded-full px-4 duration-300 font-medium p-3 '>
+                        <div className='bg-white p-2 text-main shadow-xl rounded-full'>
                             <FaPaperPlane className='text-[12px]' />
                         </div> Get Premium
                     </button>
