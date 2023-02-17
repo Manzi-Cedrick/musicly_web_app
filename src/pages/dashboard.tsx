@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Sidebar from '../components/Sidebar'
 import { albumDataArr, albumInt, songAlbumArr } from '../utils/album.data'
@@ -6,6 +6,9 @@ import { albumDataArr, albumInt, songAlbumArr } from '../utils/album.data'
 const Dashboard = () => {
     const [albumData, setalbumData] = useState<albumInt[]>(albumDataArr)
     const [songData, setSongData] = useState<albumInt[]>(songAlbumArr)
+    useEffect(()=>{
+        setalbumData(albumData.slice(0,5))
+    },[albumData])
     return (
         <div className='bg-[#111111] min-h-screen min-w-screen flex justify-start'>
             <Sidebar />
@@ -56,7 +59,7 @@ const Dashboard = () => {
                                         <th>Like</th>
                                     </tr>
                                     {albumData.map((album: albumInt, i: number) => (
-                                        <tr className="border-b-2 hover:bg-slate-900 hover:cursor-pointer border-gray-500 text-[12px] font-semibold">
+                                        <tr key={i} className="border-b-2 hover:bg-slate-900 hover:cursor-pointer border-gray-500 text-[12px] font-semibold">
                                             <td className='text-center'>
                                                 # {i}
                                             </td>
@@ -74,8 +77,8 @@ const Dashboard = () => {
                             <div className=' w-[28%]'>
                                 <h1 className='py-6 text-xl font-bold'>Hot Track</h1>
                                 <div className='flex bg-slate-900 py-4 flex-col px-4 w-full'>
-                                    {songData ? songData.map((album: any) => (
-                                        <div className='w-[18vw] cursor-pointer'>
+                                    {songData ? songData.map((album: any,i:number) => (
+                                        <div key={i} className='w-[18vw] cursor-pointer'>
                                             <div className='w-full h-[60%] rounded-sm'>
                                                 <img className='h-full w-full object-fill rounded-sm' src={`${album.cover_image}`} alt="" />
                                             </div>
