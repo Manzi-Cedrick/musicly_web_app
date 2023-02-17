@@ -15,6 +15,13 @@
     background-repeat: no-repeat;
     background-blend-mode: multiply;
 }
+.bg-linear {
+    background: linear-gradient(120deg, rgba(12, 13, 13, 0.509) 67%, rgba(130, 178, 186, 0.564) 91%);
+    /* background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply; */
+}
 ::-webkit-scrollbar{
     width: 5px;
     border-radius: 12px;
