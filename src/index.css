@@ -22,6 +22,10 @@
     background-repeat: no-repeat;
     background-blend-mode: multiply; */
 }
+.bg-genre {
+    background: rgb(12,12,13);
+    background: linear-gradient(297deg, rgba(12,12,13,1) 42%, rgba(130,178,186,0.97) 91%);
+    }
 ::-webkit-scrollbar{
     width: 5px;
     border-radius: 12px;
