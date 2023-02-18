@@ -16,7 +16,7 @@ const CreateSong = () => {
                     </div>
                 </div>
                 <div className='font-bold text-xl text-white w-[100%]'>
-                    <h1 className='py-6 text-main text-[16px]'>Save New Songs</h1>
+                    <h1 className='py-6 text-main text-[16px]'>New song.</h1>
                     <AddSongForm/>
                 </div>
             </div>
