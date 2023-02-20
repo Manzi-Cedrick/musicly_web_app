@@ -2,19 +2,19 @@ import { http } from "../utils/https/http-common";
 
 class AlbumService {
     createAlbum(data: any) {
-        return http.post('/album/create', data)
+        return http.post('/albums', data)
     }
     updateAlbum(id: string, data: any) {
-        return http.put(`/album/update/${id}`, data)
+        return http.put(`/album/${id}`, data)
     }
     deleteAlbum(id: string) {
-        return http.delete(`/album/delete/${id}`)
+        return http.delete(`/album/${id}`)
     }
     showAlbum(){
-        return http.get('/album/all')
+        return http.get('/albums')
     }
     singleAlbum(id:string) {
-        return http.get(`/album/get/${id}`)
+        return http.get(`/album/${id}`)
     }
 }
 const albumService = new AlbumService();
