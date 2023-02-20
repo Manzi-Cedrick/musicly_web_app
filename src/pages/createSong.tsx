@@ -1,6 +1,7 @@
 import React from 'react'
 import AddSongForm from '../components/addSongForm'
 import Sidebar from '../components/Sidebar'
+import RouteProtection from '../utils/route_protection'
 
 const CreateSong = () => {
     return (
@@ -24,4 +25,4 @@ const CreateSong = () => {
     )
 }
 
-export default CreateSong
+export default RouteProtection(CreateSong)
