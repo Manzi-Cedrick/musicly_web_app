@@ -2,19 +2,19 @@ import { http } from "../utils/https/http-common";
 
 class SongService {
     createSong(data:any){
-        return http.post(`/song/new`,data)
+        return http.post(`/songs`,data)
     }
     updateSong(id:string,data:any){
-        return http.put(`/song/update/${id}`,data)
+        return http.put(`/songs/${id}`,data)
     }
     displaySongs(){
-        return http.get(`/song/all`);
+        return http.get(`/songs`);
     }
     singleSong(id:string){
-        return http.get(`/song/detail/${id}`)
+        return http.get(`/songs/${id}`)
     }
     deleteSong(id:string){
-        return http.delete(`/song/delete/${id}`)
+        return http.delete(`/songs/${id}`)
     }
 }
 const songService = new SongService();
