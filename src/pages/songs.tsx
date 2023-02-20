@@ -5,6 +5,7 @@ import DeleteData from '../components/modals/deleteData';
 import Sidebar from '../components/Sidebar'
 import SongTable from '../components/songTable';
 import { albumDataArr, albumInt } from '../utils/album.data'
+import RouteProtection from '../utils/route_protection';
 import UpdateSong from './updateSong';
 
 const Songs = () => {
@@ -40,4 +41,4 @@ const Songs = () => {
   )
 }
 
-export default Songs
+export default RouteProtection(Songs)
