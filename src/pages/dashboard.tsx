@@ -1,14 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Sidebar from '../components/Sidebar'
+import albumService from '../services/album.service'
+import authService from '../services/auth.service'
+import songService from '../services/song.service'
 import { albumDataArr, albumInt, songAlbumArr } from '../utils/album.data'
+import RouteProtection from '../utils/route_protection'
 
 const Dashboard = () => {
-    const [albumData, setalbumData] = useState<albumInt[]>(albumDataArr)
-    const [songData, setSongData] = useState<albumInt[]>(songAlbumArr)
-    useEffect(()=>{
-        setalbumData(albumData.slice(0,5))
-    },[albumData])
+    const [albumData, setalbumData] = useState<any>(albumDataArr)
+    const [songData, setSongData] = useState<any>(songAlbumArr)
+
+    const fetchAlbums = async () => {
+        const albums = await albumService.showAlbum();
+        setalbumData(albums?.data?.albums);
+        console.log("albums", albums)
+    }
+    const fetchSongs = async () => {
+        const songs = await songService.displaySongs();
+        setSongData(songs?.data?.songs);
+        console.log("Songs", songs)
+    }
+    useEffect(() => {
+        try {
+            fetchAlbums();
+            fetchSongs()
+        } catch (error: any) {
+            return error;
+        }
+    }, [])
+
     return (
         <div className='bg-[#111111] min-h-screen min-w-screen flex justify-start'>
             <Sidebar />
@@ -56,20 +77,20 @@ const Dashboard = () => {
                                         <th>Name of Song</th>
                                         <th>Artist </th>
                                         <th>Time</th>
-                                        <th>Like</th>
+                                        <th>Genre</th>
                                     </tr>
-                                    {albumData.map((album: albumInt, i: number) => (
+                                    {songData.map((song: any, i: number) => (
                                         <tr key={i} className="border-b-2 hover:bg-slate-900 hover:cursor-pointer border-gray-500 text-[12px] font-semibold">
                                             <td className='text-center'>
                                                 # {i}
                                             </td>
                                             <td className='flex gap-8 py-3 justify-center place-items-center text-center'>
-                                                <img className='w-8 h-8 object-cover rounded-full' src={`${album.cover_image}`} alt="" />
-                                                <span>{album.title}</span>
+                                                <img className='w-8 h-8 object-cover rounded-full' src={`${song.cover_image}`} alt="" />
+                                                <span>{song.title}</span>
                                             </td>
-                                            <td className='text-center'>{album.artist}</td>
-                                            <td className='text-center'>{i}</td>
-                                            <td className='text-center'>{i}</td>
+                                            <td className='text-center'>{song.artist}</td>
+                                            <td className='text-center'>{song.length}</td>
+                                            <td className='text-center'>{song.genre}</td>
                                         </tr>
                                     ))}
                                 </table>
@@ -77,19 +98,15 @@ const Dashboard = () => {
                             <div className=' w-[28%]'>
                                 <h1 className='py-6 text-xl font-bold'>Hot Track</h1>
                                 <div className='flex bg-slate-900 py-4 flex-col px-4 w-full'>
-                                    {songData ? songData.map((album: any,i:number) => (
-                                        <div key={i} className='w-[18vw] cursor-pointer'>
-                                            <div className='w-full h-[60%] rounded-sm'>
-                                                <img className='h-full w-full object-fill rounded-sm' src={`${album.cover_image}`} alt="" />
-                                            </div>
-                                            <div className='text-white text-center py-4'>
-                                                <h1 className='text-[14px] font-semibold'>{album.title}</h1>
-                                                <p className='text-gray-500 text-[12px]'>{album.category}</p>
-                                            </div>
+                                    <div className='w-[18vw] cursor-pointer'>
+                                        <div className='w-full h-[60%] rounded-sm'>
+                                            <img className='h-full w-full object-fill rounded-sm' src={`https://people.com/thmb/YC7DQECGLdGPQYm1wOJsSJ8pocI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(999x0:1001x2)/taylor-swift-albums-4-431520e5189f42ff81a638580d5ac8a2.jpg`} alt="" />
                                         </div>
-                                    )) : (
-                                        <p>No Albums Defined !</p>
-                                    )}
+                                        <div className='text-white text-center py-4'>
+                                            <h1 className='text-[14px] font-semibold'>{'The RED'}</h1>
+                                            <p className='text-gray-500 text-[12px]'>{'Rock & Roll'}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -101,4 +118,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard
+export default RouteProtection(Dashboard)
