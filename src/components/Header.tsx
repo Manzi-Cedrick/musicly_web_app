@@ -1,8 +1,24 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import { FaPaperPlane, FaBell } from 'react-icons/fa'
+import authService from '../services/auth.service'
 import SearchInput from './SearchInput'
 
 const Header = () => {
+    const [user,setUser] = useState<any>()
+    useEffect(() => {
+        const userCheck = async () => {
+            const response = await authService.isLoggedIn();
+            if (response && response.data) {
+                setUser(response.data.user);
+            }
+        }
+
+        return () => {
+            // second
+            userCheck()
+        }
+    }, [])
+
     return (
         <div className='flex justify-between'>
             <SearchInput/>
@@ -22,7 +38,7 @@ const Header = () => {
                         <img className='w-full h-full object-cover rounded-full' src="https://media.istockphoto.com/id/1336246945/photo/beauty-portrait-of-african-american-girl-with-afro-hair.jpg?b=1&s=170667a&w=0&k=20&c=I6URbiSVuR_5BHBMEj7dAryG9ripn47IlWUvtmbHZ0E=" alt="" />
                     </div>
                     <div className='text-white'>
-                        <h1>Lauren Jane</h1>
+                        <h1>{user?.username}</h1>
                         <p className='text-gray-500 text-[12px]'>Free plan</p>
                     </div>
                 </div>
