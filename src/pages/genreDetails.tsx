@@ -1,6 +1,7 @@
 import React from 'react'
 import Sidebar from '../components/Sidebar'
 import SongTable from '../components/songTable'
+import RouteProtection from '../utils/route_protection'
 
 const GenreDetails = () => {
   return (
@@ -31,4 +32,4 @@ const GenreDetails = () => {
   )
 }
 
-export default GenreDetails
+export default RouteProtection(GenreDetails)
