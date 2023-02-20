@@ -5,6 +5,7 @@ import AlbumTable from '../components/albumTable';
 import DeleteData from '../components/modals/deleteData';
 import Sidebar from '../components/Sidebar'
 import { albumDataArr, albumInt } from '../utils/album.data'
+import RouteProtection from '../utils/route_protection';
 
 const Album = () => {
     const navigate = useNavigate()
@@ -39,4 +40,4 @@ const Album = () => {
     )
 }
 
-export default Album
+export default RouteProtection(Album)
