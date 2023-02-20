@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
 import UpdateAlbumForm from '../components/updateAlbumForm'
+import RouteProtection from '../utils/route_protection'
 
 const UpdateAlbum = () => {
     const { id } = useParams();
@@ -26,4 +27,4 @@ const UpdateAlbum = () => {
     )
 }
 
-export default UpdateAlbum
+export default RouteProtection(UpdateAlbum)
