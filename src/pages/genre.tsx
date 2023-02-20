@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar'
 import { albumDataArr } from '../utils/album.data'
+import RouteProtection from '../utils/route_protection';
 
 const Genre = () => {
   const [albumData, setalbumData] = useState(albumDataArr);
@@ -33,4 +34,4 @@ const Genre = () => {
   )
 }
 
-export default Genre
+export default RouteProtection(Genre)
