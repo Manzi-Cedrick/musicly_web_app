@@ -25,8 +25,8 @@ export const App = () => {
             <Route element={<CreateAlbum />} path='/album/new'/>
             <Route element={<UpdateAlbum />} path='/albums/:id/update' />
             <Route element={<GenreDetails />} path='/genre/:id/details' />
-            <Route element={<Login />} path='/login'/>
-            <Route element={<SignUp/>} path='/signup' />
+            <Route element={<Login />} path='/auth/login'/>
+            <Route element={<SignUp/>} path='/auth/signup' />
        </Routes>
        </>
     )
