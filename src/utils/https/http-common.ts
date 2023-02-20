@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import authService from '../../services/Auth.service';
+import authService from '../../services/auth.service';
 export const domain = `http://localhost:8000`
 
 export const http = axios.create({
