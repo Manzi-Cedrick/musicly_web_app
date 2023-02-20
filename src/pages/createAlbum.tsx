@@ -1,5 +1,6 @@
 import AddAlbumForm from '../components/addAlbumForm'
 import Sidebar from '../components/Sidebar'
+import RouteProtection from '../utils/route_protection'
 
 const CreateAlbum = () => {
     return (
@@ -23,4 +24,4 @@ const CreateAlbum = () => {
     )
 }
 
-export default CreateAlbum
+export default RouteProtection(CreateAlbum)
