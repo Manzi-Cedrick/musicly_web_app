@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useEffect , useState} from 'react'
 import Logo from '../assets/logo'
 import { Link, useLocation } from 'react-router-dom'
 import { sideBarArr } from '../utils/pagedata'
+import authService from '../services/auth.service'
 const Sidebar = () => {
+  
     const linkSet = sideBarArr;
-    const route = useLocation()
-    const changeHeader = (path:string) => {
-            if (path === route.pathname){
-                return ` bg-main text-white font-bold`
-            }
+    const route = useLocation();
+    const changeHeader = (path: string) => {
+        if (path === route.pathname) {
+            return ` bg-main text-white font-bold`
+        }
     }
     return (
         <aside className='bg-[##120C0D] fixed top-0 left-0 z-40 border-r-2 border-gray-800 w-[20vw] min-h-screen flex px-2 flex-col'>
