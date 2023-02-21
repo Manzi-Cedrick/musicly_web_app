@@ -1,6 +1,6 @@
 import { http } from "../utils/https/http-common";
 
-class SongService {
+export default class SongService {
     createSong(data:any){
         return http.post(`/songs`,data)
     }
@@ -17,5 +17,3 @@ class SongService {
         return http.delete(`/songs/${id}`)
     }
 }
-const songService = new SongService();
-export default songService;
