@@ -29,7 +29,7 @@ export const sideBarArr :linkSide[] = [
     link_id:4
 },{
     link_name:'Sign out',
-    link_url:'/login',
+    link_url:'/logout',
     link_icon_name:<FaSignOutAlt/>,
     link_id:5
 }]
