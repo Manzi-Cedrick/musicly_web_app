@@ -11,6 +11,7 @@ const Header = () => {
             if (response && response.data) {
                 setUser(response.data.user);
             }
+            console.log(user)
         }
 
         return () => {
