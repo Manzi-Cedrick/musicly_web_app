@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Sidebar from '../components/Sidebar'
 import AlbumService from '../services/album.service'
+import SongService from '../services/song.service'
 import songService from '../services/song.service'
 import { albumDataArr, songAlbumArr } from '../utils/album.data'
 import RouteProtection from '../utils/route_protection'
@@ -16,9 +17,9 @@ const Dashboard = () => {
         setalbumData(albums?.data?.albums);
     }
     const fetchSongs = async () => {
+        const songService = new SongService()
         const songs = await songService.displaySongs();
         setSongData(songs?.data?.songs);
-        console.log("Songs", songs)
     }
     useEffect(() => {
         try {
