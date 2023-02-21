@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Sidebar from '../components/Sidebar'
-import albumService from '../services/album.service'
-import authService from '../services/auth.service'
+import AlbumService from '../services/album.service'
 import songService from '../services/song.service'
-import { albumDataArr, albumInt, songAlbumArr } from '../utils/album.data'
+import { albumDataArr, songAlbumArr } from '../utils/album.data'
 import RouteProtection from '../utils/route_protection'
 
 const Dashboard = () => {
@@ -12,9 +11,9 @@ const Dashboard = () => {
     const [songData, setSongData] = useState<any>(songAlbumArr)
 
     const fetchAlbums = async () => {
+        const albumService = new AlbumService();
         const albums = await albumService.showAlbum();
         setalbumData(albums?.data?.albums);
-        console.log("albums", albums)
     }
     const fetchSongs = async () => {
         const songs = await songService.displaySongs();
@@ -54,7 +53,7 @@ const Dashboard = () => {
                             <h1 className='py-6'>Top Albums</h1>
                             <div className='grid lg:grid-cols-8 pr-4 w-full gap-4'>
                                 {albumData ? albumData.map((album: any) => (
-                                    <div className='w-[8vw] cursor-pointer'>
+                                    <div key={album.album_id} className='w-[8vw] cursor-pointer'>
                                         <div className='w-full h-[60%] rounded-sm'>
                                             <img className='h-full w-full object-fill rounded-sm' src={`${album.cover_image}`} alt="" />
                                         </div>
@@ -72,6 +71,8 @@ const Dashboard = () => {
                             <div className='font-bold text-xl w-[74%]'>
                                 <h1 className='py-6'>Lauren 's Playlist</h1>
                                 <table className=' w-full'>
+                                    <thead>
+
                                     <tr className='text-gray-500 outline-2 outline-dashed h-12 border-gray-500 text-[14px]'>
                                         <th>#</th>
                                         <th>Name of Song</th>
@@ -79,20 +80,27 @@ const Dashboard = () => {
                                         <th>Time</th>
                                         <th>Genre</th>
                                     </tr>
-                                    {songData.map((song: any, i: number) => (
-                                        <tr key={i} className="border-b-2 hover:bg-slate-900 hover:cursor-pointer border-gray-500 text-[12px] font-semibold">
+                                    </thead>
+                                    <tbody>
+
+                                    {songData ? songData.map((song: any, i:number) => (
+                                        <tr key={song.song_id} className="border-b-2 hover:bg-slate-900 hover:cursor-pointer border-gray-500 text-[12px] font-semibold">
                                             <td className='text-center'>
-                                                # {i}
+                                                # {i+1}
                                             </td>
                                             <td className='flex gap-8 py-3 justify-center place-items-center text-center'>
-                                                <img className='w-8 h-8 object-cover rounded-full' src={`${song.cover_image}`} alt="" />
                                                 <span>{song.title}</span>
                                             </td>
                                             <td className='text-center'>{song.artist}</td>
                                             <td className='text-center'>{song.length}</td>
                                             <td className='text-center'>{song.genre}</td>
                                         </tr>
-                                    ))}
+                                    )):
+                                        <tr>
+                                            <td>No Data</td>
+                                        </tr>
+                                    }
+                                    </tbody>
                                 </table>
                             </div>
                             <div className=' w-[28%]'>
