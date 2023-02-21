@@ -1,21 +1,19 @@
 import { http } from "../utils/https/http-common";
 
-class AlbumService {
+export default class AlbumService {
     createAlbum(data: any) {
         return http.post('/albums', data)
     }
     updateAlbum(id: string, data: any) {
-        return http.put(`/album/${id}`, data)
+        return http.put(`/albums/${id}`, data)
     }
     deleteAlbum(id: string) {
-        return http.delete(`/album/${id}`)
+        return http.delete(`/albums/${id}`)
     }
     showAlbum(){
-        return http.get('/albums')
+        return http.get('/albums');
     }
     singleAlbum(id:string) {
-        return http.get(`/album/${id}`)
+        return http.get(`/albums/${id}`)
     }
 }
-const albumService = new AlbumService();
-export default albumService;
