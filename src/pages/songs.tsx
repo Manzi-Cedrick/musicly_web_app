@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { FaPlus } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router-dom';
 import DeleteData from '../components/modals/deleteData';
 import Sidebar from '../components/Sidebar'
 import SongTable from '../components/songTable';
+import SongService from '../services/song.service';
 import { albumDataArr, albumInt } from '../utils/album.data'
 import RouteProtection from '../utils/route_protection';
 import UpdateSong from './updateSong';
@@ -13,6 +14,19 @@ const Songs = () => {
   const redirectSongPage = () => {
     navigate('/songs/new')
   }
+  let [songData, setsongData] = useState([]);
+    const songService = new SongService();
+    useEffect(() => {
+        const displayAlbumsInfo = async () => {
+            const res = await songService.displaySongs();
+            let data = res.data.songs
+            setsongData(data);
+            console.log("The AUD DATA",songData)
+        }
+        return () => {
+            displayAlbumsInfo();
+        }
+    }, [songData]);
   return (
     <div className='bg-[#111111] min-h-screen min-w-screen flex justify-start'>
       <Sidebar />
@@ -34,7 +48,7 @@ const Songs = () => {
               </button>
             </div>
           </div>
-          <SongTable/>
+          <SongTable data={songData}/>
         </div>
       </div>
     </div>
