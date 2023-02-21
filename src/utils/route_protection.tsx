@@ -1,30 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import authService from '../services/auth.service';
-import { useNavigate } from 'react-router-dom';
+import LoaderPage from '../components/loaders/loader';
 
 const RouteProtection = (WrappedComponent: any) => {
   const Wrapper = (props: any) => {
     const [authenticated, setAuthenticated] = useState(false);
     const [user, setUser] = useState<any | undefined>(undefined);
-    const navigate = useNavigate();
+    const [loader, setLoader] = useState(false)
 
     const checkAuthentication = async () => {
       try {
+        setLoader(true)
         const response = await authService.isLoggedIn();
         if (response && response.data) {
           setUser(response.data.user);
           setAuthenticated(true);
+          setLoader(false)
+          if (response?.data?.message === 'User not found') {
+            window.location.pathname = '/auth/login';
+          }
         }
       } catch (error: any) {
-        navigate('/auth/login');
+        window.location.pathname = '/auth/login';
       }
     };
 
     useEffect(() => {
       checkAuthentication();
     }, []);
-
-    if (authenticated) {
+    if (loader) {
+      return <LoaderPage />
+    }
+    if (authenticated && !loader) {
       return <WrappedComponent {...props} />;
     } else {
       return null;
