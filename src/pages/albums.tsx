@@ -19,15 +19,13 @@ const Album = () => {
             const res = await albumService.showAlbum();
             let data = res.data.albums
             setalbumData(data);
-            console.log("The AUD DATA",albumData)
+            console.log("The AUD DATA", albumData)
         }
-        return () => {
-            displayAlbumsInfo();
-        }
-    }, [albumData]);
+        displayAlbumsInfo()
+    }, []);
     return (
         <>
-            <div className='bg-[#111111] min-h-screen min-w-screen flex justify-start'>
+            <div className='bg-[#111111]  h-screen min-w-screen flex justify-start'>
                 <Sidebar />
                 <div className='py-4 sm:ml-80 w-[80vw] lg:p-8'>
                     <div className='bg-genre flex px-6  flex-col justify-center w-full h-[20vh] rounded-xl'>
@@ -38,7 +36,7 @@ const Album = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='font-bold text-xl text-white w-[100%]'>
+                    <div className='font-bold text-xl text-white  w-[100%]'>
                         <div className='flex justify-between'>
                             <h1 className='py-6'>Album records</h1>
                             <div className='flex justify-center py-4 '>
@@ -47,11 +45,12 @@ const Album = () => {
                                 </button>
                             </div>
                         </div>
-                        <AlbumTable data={albumData} />
+                        <div className='overflow-y-auto bg-[#2d2d2d61] h-[64vh] rounded-xl px-4 py-4'>
+                            <AlbumTable data={albumData} />
+                        </div>
                     </div>
                 </div>
             </div>
-            :
         </>
     )
 }
