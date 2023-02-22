@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import GenreTable from '../components/genreTable'
 import Sidebar from '../components/Sidebar'
 import SongTable from '../components/songTable'
+import GenreService from '../services/genre.service'
 import RouteProtection from '../utils/route_protection'
 
 const GenreDetails = () => {
+  let [songGenreData, setSongGenreData] = useState([])
+  const { id } = useParams();
+  const genreService = new GenreService();
+  useEffect(() => {
+    const genreSongsFetch = async () => {
+      const res = await genreService.getSongsByGenre(id);
+      let data = res.data.songs
+      setSongGenreData(data);
+      console.log("The AUD DATA", songGenreData)
+    }
+
+    return () => {
+      genreSongsFetch();
+    }
+  }, [])
+
   return (
     <div className='bg-[#111111] min-h-screen min-w-screen flex justify-start'>
       <Sidebar />
@@ -18,14 +37,7 @@ const GenreDetails = () => {
         </div>
         <div className='font-bold text-xl text-white w-[100%]'>
           <h1 className='py-6'>Popular Songs</h1>
-          <SongTable/>
-          {/* <div className='grid grid-cols-6 gap-2'>
-            {albumData.map((genre: any) => (
-              <div className={`bg-blue-400 hover:bg-main hover:scale-105 hover:shadow-slate-700 hover:-translate-y-4 hover:shadow-2xl duration-700 group min-h-[25vh] rounded-lg flex justify-center place-items-center hover:cursor-pointer max-w-[14vw]`}>
-                <h1 className='group-hover:text-x duration-500'>{genre.category}</h1>
-              </div>
-            ))}
-          </div> */}
+          <GenreTable data={songGenreData} />
         </div>
       </div>
     </div>
