@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as ReactDOM from 'react-dom';
 import { FaCross } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
@@ -19,7 +19,8 @@ const DeleteData = ({ showModal, onClose, id }: { showModal: Boolean, onClose: a
             let message = data?.data?.message;
             if (message === 'Album deleted successfully') {
                 notifySuccess(message);
-                navigate('/albums')
+                onClose();
+                window.location.reload();
             } else {
                 notifyInfo(message);
             }
@@ -32,10 +33,10 @@ const DeleteData = ({ showModal, onClose, id }: { showModal: Boolean, onClose: a
         <div className='bg-[#000000cb] min-h-screen flex place-items-center justify-center absolute top-0 bottom-0 left-0 right-0'>
             <div className='bg-slate-800 text-white py-5 px-10 w-[36vw] rounded-sm'>
                 <div className='flex justify-between place-items-center py-2'>
-                    <h1>Delete data.</h1>
+                    <h1>Delete song.</h1>
                     <div>
-                        <button onClick={onClose} className='bg-slate-900 p-3 text-[12px] rounded-md hover:bg-slate-300 duration-500'>
-                            <FaCross />
+                        <button onClick={onClose} className='bg-slate-900 h-12 w-12 text-2xl rounded-full hover:bg-slate-300 duration-500'>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                 </div>
