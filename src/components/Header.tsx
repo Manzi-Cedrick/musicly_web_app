@@ -4,22 +4,16 @@ import authService from '../services/auth.service'
 import SearchInput from './SearchInput'
 
 const Header = () => {
-    const [user,setUser] = useState<any>()
+    let [user,setUser] = useState<any>({})
     useEffect(() => {
         const userCheck = async () => {
             const response = await authService.isLoggedIn();
             if (response && response.data) {
                 setUser(response.data.user);
             }
-            console.log(user)
         }
-
-        return () => {
-            // second
-            userCheck()
-        }
-    }, [])
-
+        userCheck()
+    }, []);
     return (
         <div className='flex justify-between'>
             <SearchInput/>
