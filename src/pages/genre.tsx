@@ -1,12 +1,23 @@
-import React, { useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom';
+import React, { useState , useEffect} from 'react'
+import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar'
-import { albumDataArr } from '../utils/album.data'
+import GenreService from '../services/genre.service';
 import RouteProtection from '../utils/route_protection';
 
 const Genre = () => {
-  const [albumData, setalbumData] = useState(albumDataArr);
   const navigate = useNavigate();
+  let [genreData, setgenreData] = useState([]);
+    const genreService = new GenreService();
+    useEffect(() => {
+        const displayAlbumsInfo = async () => {
+            const res = await genreService.getGenreDetails();
+            let data = res.data.genres
+            // setgenreData(data);
+            console.log(res)
+        }
+            displayAlbumsInfo();
+      
+    }, [genreData]);
   return (
     <div className='bg-[#111111] min-h-screen min-w-screen flex justify-start'>
       <Sidebar />
@@ -22,7 +33,7 @@ const Genre = () => {
         <div className='font-bold text-xl text-white w-[100%]'>
           <h1 className='py-6'>Popular categories</h1>
           <div className='grid grid-cols-6 gap-2'>
-            {albumData.map((genre: any, i: number) => (
+            {genreData.map((genre: any, i: number) => (
               <div onClick={() => navigate(`/genre/${i}/details`)} className={`bg-blue-400 hover:bg-main hover:scale-105 hover:shadow-slate-700 hover:-translate-y-4 hover:shadow-2xl duration-700 group min-h-[25vh] rounded-lg flex justify-center place-items-center hover:cursor-pointer max-w-[14vw]`}>
                 <h1 className='group-hover:text-x duration-500'>{genre.category}</h1>
               </div>
