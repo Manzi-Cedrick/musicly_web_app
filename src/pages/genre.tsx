@@ -17,7 +17,7 @@ const Genre = () => {
         }
             displayAlbumsInfo();
       
-    }, [genreData]);
+    }, []);
   return (
     <div className='bg-[#111111] min-h-screen min-w-screen flex justify-start'>
       <Sidebar />
