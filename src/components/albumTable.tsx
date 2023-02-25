@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { albumInt } from '../utils/album.data';
 import DeleteData from './modals/deleteData'
 
-const AlbumTable = ({data}:{data:any}) => {
+const AlbumTable = ({ data }: { data: any }) => {
     const navigate = useNavigate();
     const [modal, setModal] = useState({
         id: '',
@@ -22,23 +22,26 @@ const AlbumTable = ({data}:{data:any}) => {
                 </tr>
             </thead>
             <tbody>
-                {data.map((album: albumInt, i: number) => (
-                        <tr key={i} className="border-b-2 text-slate-200 font-light hover:bg-main text-center hover:cursor-pointer group hover:border-white duration-500 border-gray-500 text-[12px]">
-                            <td className='text-center'>
-                                # {i + 1}
-                            </td>
-                            <td className='flex font-bold gap-8 py-5 justify-start mx-20 place-items-center text-center'>
-                                <img className='w-8 h-8 object-cover rounded-sm' src={`${album.cover_image}`} alt="" />
-                                <span>{album.title}</span>
-                            </td>
-                            <td className='text-left'>{album?.description}</td>
-                            <td className='text-left'>{album?.release_date}</td>
-                            <td className='text-center justify-center'>
-                                <button onClick={() => { navigate(`/albums/${album.album_id}/update`) }} className='bg-main hover:bg-white hover:text-main duration-500 border-2 border-white opacity-95 mx-4 text-black py-1 px-6 text-[12px] rounded-md'>Update</button>
-                                <button onClick={() => setModal({ ...modal, id: album.album_id, showModal: true })} className='group-hover:bg-white group-hover:text-main bg-transparent hover:bg-slate-700 hover:text-main duration-500 border-2 border-main text-main py-1 px-6 text-[12px] rounded-md'>Delete</button>
-                            </td>
-                        </tr>
-                    ))
+                {data ? data.map((album: albumInt, i: number) => (
+                    <tr key={i} className="border-b-2 text-slate-200 font-light hover:bg-main text-center hover:cursor-pointer group hover:border-white duration-500 border-gray-500 text-[12px]">
+                        <td className='text-center'>
+                            # {i + 1}
+                        </td>
+                        <td className='flex font-bold gap-8 py-5 justify-start mx-20 place-items-center text-center'>
+                            <img className='w-8 h-8 object-cover rounded-sm' src={`${album.cover_image}`} alt="" />
+                            <span>{album.title}</span>
+                        </td>
+                        <td className='text-left'>{album?.description}</td>
+                        <td className='text-left'>{album?.release_date}</td>
+                        <td className='text-center justify-center'>
+                            <button onClick={() => { navigate(`/albums/${album.album_id}/update`) }} className='bg-main hover:bg-white hover:text-main duration-500 border-2 border-white opacity-95 mx-4 text-black py-1 px-6 text-[12px] rounded-md'>Update</button>
+                            <button onClick={() => setModal({ ...modal, id: album.album_id, showModal: true })} className='group-hover:bg-white group-hover:text-main bg-transparent hover:bg-slate-700 hover:text-main duration-500 border-2 border-main text-main py-1 px-6 text-[12px] rounded-md'>Delete</button>
+                        </td>
+                    </tr>
+                )) :
+                    <tr className='text-[14px] bg-slate-900 flex justify-center'>
+                        <td className='p-6'>No Data Fetch</td>
+                    </tr>
                 }
             </tbody>
             <DeleteData id={modal.id} showModal={modal.showModal} onClose={() => setModal({ ...modal, showModal: false })} />
