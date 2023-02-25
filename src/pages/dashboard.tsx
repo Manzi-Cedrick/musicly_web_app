@@ -3,7 +3,6 @@ import Header from '../components/Header'
 import Sidebar from '../components/Sidebar'
 import AlbumService from '../services/album.service'
 import SongService from '../services/song.service'
-import songService from '../services/song.service'
 import { albumDataArr, songAlbumArr } from '../utils/album.data'
 import RouteProtection from '../utils/route_protection'
 
@@ -124,4 +123,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard
+export default RouteProtection(Dashboard)
