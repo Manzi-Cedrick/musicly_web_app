@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { FaPlus } from 'react-icons/fa';
-import { useLocation, useNavigate } from 'react-router-dom';
-import DeleteData from '../components/modals/deleteData';
+import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar'
 import SongTable from '../components/songTable';
 import SongService from '../services/song.service';
-import { albumDataArr, albumInt } from '../utils/album.data'
 import RouteProtection from '../utils/route_protection';
-import UpdateSong from './updateSong';
 
 const Songs = () => {
   const navigate = useNavigate();
@@ -17,13 +14,14 @@ const Songs = () => {
   let [songData, setsongData] = useState([]);
   const songService = new SongService();
   useEffect(() => {
-    const displayAlbumsInfo = async () => {
+    const songsInfo = async () => {
       const res = await songService.displaySongs();
       let data = res.data.songs
       setsongData(data);
     }
-    displayAlbumsInfo();
+    songsInfo();
   }, []);
+  console.log("Song:",songData)
   return (
     <div className='bg-[#111111] h-screen min-w-screen flex justify-start'>
       <Sidebar />
